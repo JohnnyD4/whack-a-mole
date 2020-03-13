@@ -2,16 +2,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Davis" />
     <title>Whack-A-Mole</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="shortcut icon" href="assets/mole.png" />
     <script type="text/javascript" src="assets/game.js"></script>
   </head>
-  <body>
+  <body onload="showScores()">
     <div class="container">
       <div class="game">
         <div class="banner" id="start" onclick="startGame()">
-          <h2>Lets Play Whack-A-Mole!</h2>
-          <h4>Start Game</h4>
+          <h2>Let's Play Whack-A-Mole!</h2>
+          <h4 id="start-text">Start Game</h4>
         </div>
         <div class="row">
           <div class="hole" id="0" onclick="holeClicked(0)">
@@ -40,11 +42,12 @@
       </div>
       <div>
         <p>Score: <span id="score">0</span></p>
+        <p>Your High Score: <span id="high-score"></span></p>
         <p>Countdown: <span id="timer">30</span></p>
         <button class="button hide" id="stop" onclick="stopGame()">
           Stop Game
         </button>
-        <button class="button" onclick="resetGame()">
+        <button class="button hide" id="reset" onclick="resetGame()">
           Reset Game
         </button>
       </div>

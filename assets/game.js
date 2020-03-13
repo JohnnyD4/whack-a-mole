@@ -3,6 +3,7 @@ const defaultScore = 0;
 
 let timer = defaultTimer;
 let score = defaultScore;
+let highScore = window.localStorage.getItem('high-score') || defaultScore;
 let counter = 0;
 let isStopped = true;
 let isActive = false;
@@ -20,6 +21,8 @@ let moleCount = null;
 const startGame = () => {
   setElementVisibility('start', 'hidden');
   setElementVisibility('stop', 'initial');
+  setElementVisibility('reset', 'initial');
+  showScores();
 
   isStopped = false;
 
@@ -44,7 +47,9 @@ const startGameTimer = () => {
   }
 
   if (timer == 0) {
+    isActive = false;
     stopGame();
+
     timer = defaultTimer;
     score = defaultScore;
   }
@@ -55,10 +60,26 @@ const startGameTimer = () => {
 /**
  * Stops/pauses the game.
  * Sets isStopped to true.
+ * Checks if its an active game.
+ * updates the high score if beaten.
  * Shows start button and hides stop button.
  */
 const stopGame = () => {
   isStopped = true;
+
+  if (isActive) {
+    document.getElementById('start-text').innerHTML = 'Resume Game';
+  } else {
+    document.getElementById(molePosition).classList.remove('mole');
+    document.getElementById('start-text').innerHTML = 'Start Game';
+    setElementVisibility('reset', 'hidden');
+
+    if (score > highScore) {
+      highScore = score;
+      window.localStorage.setItem('high-score', score);
+    }
+  }
+
 
   setElementVisibility('start', 'initial');
   setElementVisibility('stop', 'hidden');
@@ -71,13 +92,12 @@ const stopGame = () => {
  * Sets the state of the game to its default state.
  */
 const resetGame = () => {
-  stopGame();
-  document.getElementById(molePosition).classList.remove('mole');
-
   isActive = false;
+  stopGame();
+
   timer = defaultTimer;
   score = defaultScore;
-  holeClicked();
+  showScores();
 };
 
 /**
@@ -94,7 +114,7 @@ const holeClicked = (id) => {
     }
   }
 
-  document.getElementById('score').innerHTML = score;
+  showScores();
 };
 
 /**
@@ -115,7 +135,7 @@ const setMolePosition = () => {
   moleCount = setMoleCount();
   counter = 0;
   document.getElementById(molePosition).classList.add('mole');
-}
+};
 
 const intervalTimer = setInterval(startGameTimer, 1000);
 
@@ -128,6 +148,14 @@ const setMoleId = () => Math.floor(Math.random() * 9);
  * Returns a random number from 1 to 3.
  */
 const setMoleCount = () => Math.floor(Math.random() * 3) + 1;
+
+/**
+ * Displays the scores on the page.
+ */
+const showScores = () => {
+  document.getElementById('score').innerHTML = score;
+  document.getElementById('high-score').innerHTML = highScore;
+};
 
 /**
  * Counts for the moles location by seconds.
