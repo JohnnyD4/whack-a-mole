@@ -7,6 +7,7 @@ let highScore = window.localStorage.getItem('high-score') || defaultScore;
 let counter = 0;
 let isStopped = true;
 let isActive = false;
+let gameOver = false;
 let molePosition = null;
 let moleCount = null;
 
@@ -48,6 +49,7 @@ const startGameTimer = () => {
 
   if (timer == 0) {
     isActive = false;
+    gameOver = true;
     stopGame();
 
     timer = defaultTimer;
@@ -80,7 +82,14 @@ const stopGame = () => {
     }
   }
 
-  setElementVisibility('start', 'initial');
+  if (gameOver) {
+    setElementVisibility('game-over', 'initial');
+    setElementVisibility('reset', 'initial');
+  } else {
+    setElementVisibility('game-over', 'hidden');
+    setElementVisibility('start', 'initial');
+  }
+
   setElementVisibility('stop', 'hidden');
 };
 
@@ -92,6 +101,7 @@ const stopGame = () => {
  */
 const resetGame = () => {
   isActive = false;
+  gameOver = false;
   stopGame();
 
   timer = defaultTimer;
