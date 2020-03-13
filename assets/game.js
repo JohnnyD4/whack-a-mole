@@ -80,7 +80,6 @@ const stopGame = () => {
     }
   }
 
-
   setElementVisibility('start', 'initial');
   setElementVisibility('stop', 'hidden');
 };
@@ -111,10 +110,10 @@ const holeClicked = (id) => {
     if (id == molePosition) {
       score += 1;
       setMolePosition();
+      showScores();
     }
   }
 
-  showScores();
 };
 
 /**
