@@ -41,6 +41,10 @@ h2, h3 {
   margin : 0;
 }
 
+#start-text {
+  text-decoration: underline;
+}
+
 button {
   cursor: pointer;
 }
