@@ -1,9 +1,8 @@
 # Whack-A-Mole
 ## A simple HTML, CSS, and Javascript game where a mole appears and you try and click on it before it disappears.
-----
-## You have 30 seconds to hit as many moles as you can to break your record.
+### You have 30 seconds to hit as many moles as you can to break your record.
 ### **[Click here to play](https://johnnyd4.github.io/whack-a-mole/index.html)**
-===
+---
 Here are some screenshots of active play
 ![alt text](https://johnnyd4.github.io/whack-a-mole/assets/startPage.png)
 ![alt text](https://johnnyd4.github.io/whack-a-mole/assets/activeGamePage.png)
