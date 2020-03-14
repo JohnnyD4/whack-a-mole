@@ -63,7 +63,8 @@ const startGameTimer = () => {
  * Stops/pauses the game.
  * Sets isStopped to true.
  * Checks if its an active game.
- * updates the high score if beaten.
+ * updates the high score with localstorage if beaten.
+ * Checks if the game just ended and prompts the appropriate buttons.
  * Shows start button and hides stop button.
  */
 const stopGame = () => {
